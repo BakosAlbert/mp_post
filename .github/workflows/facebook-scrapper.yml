@@ -3,7 +3,7 @@ name: Facebook Scraper
 on:
   schedule:
     # minden 5. percben
-    - cron: '*/5 * * * *'
+    - cron: '*/35 * * * *'
   workflow_dispatch: # kézi futtatás lehetősége
 
 jobs:
