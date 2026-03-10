@@ -1,3 +1,5 @@
+import os
+
 APIFY_TOKEN = os.getenv("APIFY_TOKEN")
 ACTOR_ID = os.getenv("ACTOR_ID")
 WEBHOOK = os.getenv("WEBHOOK")
@@ -70,4 +72,5 @@ if run_id:
             except Exception as e:
                 log(f"Discord küldési hiba: {e}")
         else:
+
             log("😢 Nincs új poszt")
