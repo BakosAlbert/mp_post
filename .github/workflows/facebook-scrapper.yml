@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -24,7 +24,7 @@ jobs:
 
       # Letöltjük az előző last_post artifact-et
       - name: Download last post artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: last-post
           path: ./last_post.txt
@@ -41,7 +41,7 @@ jobs:
 
       # Feltöltjük a friss last_post.txt-et artifactként
       - name: Upload last post artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: last-post
           path: ./last_post.txt
