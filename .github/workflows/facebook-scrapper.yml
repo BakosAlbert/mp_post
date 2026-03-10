@@ -2,9 +2,9 @@ name: Facebook Scraper
 
 on:
   schedule:
-    # minden órában, a perc 0-nál
+    # minden 5. percben
     - cron: '*/5 * * * *'
-  workflow_dispatch: # lehetőség kézi futtatásra
+  workflow_dispatch: # kézi futtatás lehetősége
 
 jobs:
   scrape:
@@ -22,6 +22,14 @@ jobs:
       - name: Install requests
         run: pip install requests
 
+      # Letöltjük az előző last_post artifact-et
+      - name: Download last post artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: last-post
+          path: ./last_post.txt
+        continue-on-error: true
+
       - name: Run Facebook Scraper
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
@@ -29,5 +37,11 @@ jobs:
           FACEBOOK_URL: "https://www.facebook.com/peter.magyar.102"
           ACTOR_ID: "KoJrdxJCTtpon81KY"
           LAST_POST_FILE: "last_post.txt"
-        run: |
-          python mppost.py
+        run: python mppost.py
+
+      # Feltöltjük a friss last_post.txt-et artifactként
+      - name: Upload last post artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: last-post
+          path: ./last_post.txt
