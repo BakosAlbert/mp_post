@@ -1,0 +1,33 @@
+name: Facebook Scraper
+
+on:
+  schedule:
+    # minden órában, a perc 0-nál
+    - cron: '*/5 * * * *'
+  workflow_dispatch: # lehetőség kézi futtatásra
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Run Facebook Scraper
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          FACEBOOK_URL: "https://www.facebook.com/peter.magyar.102"
+          ACTOR_ID: "KoJrdxJCTtpon81KY"
+          LAST_POST_FILE: "last_post.txt"
+        run: |
+          python scraper.py
