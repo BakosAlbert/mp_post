@@ -30,4 +30,4 @@ jobs:
           ACTOR_ID: "KoJrdxJCTtpon81KY"
           LAST_POST_FILE: "last_post.txt"
         run: |
-          python scraper.py
+          python mppost.py
